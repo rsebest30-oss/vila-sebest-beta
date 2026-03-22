@@ -4,56 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vila Šebest – testovací verze</title>
+  <meta name="description" content="Rodinné ubytování ve Volarech na Šumavě. Dva samostatné apartmány, zahrada, oplocené parkování a rezervace přes Trevlix." />
   <style>
     :root{
       --bg:#f6f1e8;
       --paper:#fbf7f1;
       --sand:#eadfce;
-      --text:#2f261f;
-      --muted:#6e5b49;
+      --line:#dccdb8;
+      --text:#2d241d;
+      --muted:#6d5a48;
       --brown:#7b5f3b;
-      --dark:#241d18;
-      --line:#d9cab4;
-      --white:#fff;
+      --brown-dark:#5c4429;
+      --dark:#221b16;
+      --white:#ffffff;
+      --max:1120px;
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
       color:var(--text);
+      background:var(--bg);
       line-height:1.6;
     }
     img{max-width:100%;display:block}
     a{text-decoration:none;color:inherit}
-    .container{width:min(1120px, calc(100% - 32px));margin:0 auto}
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
     .topbar{
-      position:sticky;top:0;z-index:50;
+      position:sticky;
+      top:0;
+      z-index:50;
       background:rgba(246,241,232,.96);
       border-bottom:1px solid var(--line);
       backdrop-filter:blur(8px);
     }
     .topbar-inner{
-      display:flex;justify-content:space-between;align-items:center;
-      gap:16px;padding:14px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:14px 0;
     }
-    .brand-title{
-      font-size:28px;font-weight:700;letter-spacing:.04em;
+    .logo-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:170px;
     }
-    .brand-subtitle{
-      font-size:13px;color:var(--muted);margin-top:2px;
+    .logo-wrap img{
+      height:82px;
+      width:auto;
     }
-    .nav{display:none;gap:22px;align-items:center}
+
+    .nav{
+      display:none;
+      align-items:center;
+      gap:24px;
+      font-size:16px;
+      font-weight:600;
+    }
+    .nav a:hover{color:var(--brown)}
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:13px 22px;border-radius:999px;font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:13px 22px;
+      font-weight:700;
+      transition:.2s ease;
     }
-    .btn-primary{background:var(--brown);color:#fff}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:var(--brown);
+      color:#fff;
+    }
+    .btn-primary:hover{background:var(--brown-dark)}
     .btn-light{
+      color:#fff;
       border:1px solid rgba(255,255,255,.45);
       background:rgba(255,255,255,.08);
-      color:#fff;
+    }
+    .btn-ghost{
+      border:1px solid var(--line);
+      color:var(--text);
+      background:transparent;
     }
 
     .hero{
@@ -63,97 +103,145 @@
       align-items:flex-end;
       overflow:hidden;
       background:
-        linear-gradient(rgba(22,18,14,.35), rgba(22,18,14,.55)),
-       url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+        linear-gradient(rgba(20,17,14,.26), rgba(20,17,14,.56)),
+        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop') center 62%/cover no-repeat;
     }
     .hero-inner{
-      position:relative;z-index:2;
-      width:min(1120px, calc(100% - 32px));
+      position:relative;
+      z-index:2;
+      width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
-      padding:86px 0 46px;
+      padding:88px 0 46px;
       color:#fff;
     }
     .eyebrow{
       margin:0 0 12px;
-      font-size:12px;font-weight:700;letter-spacing:.28em;
-      text-transform:uppercase;opacity:.9;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      opacity:.92;
     }
     h1{
-      margin:0;max-width:780px;
-      font-size:clamp(38px,7vw,72px);
-      line-height:1.04;
+      margin:0;
+      max-width:800px;
+      font-size:clamp(38px, 7vw, 72px);
+      line-height:1.03;
     }
     .lead{
       margin-top:18px;
-      max-width:700px;
+      max-width:710px;
       font-size:18px;
       color:rgba(255,255,255,.92);
     }
     .hero-actions{
-      display:flex;flex-direction:column;gap:12px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
       margin-top:28px;
-      max-width:420px;
+      max-width:430px;
     }
-    .benefits{
-      display:grid;gap:12px;margin-top:28px;
+    .hero-benefits{
+      display:grid;
+      gap:12px;
+      margin-top:28px;
     }
-    .benefit{
-      padding:13px 16px;border-radius:18px;
-      background:rgba(255,255,255,.10);
+    .hero-benefit{
+      padding:13px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.11);
       border:1px solid rgba(255,255,255,.14);
-      color:#f8f1e7;
+      color:#f8f2e9;
+      font-size:15px;
     }
 
-    section{padding:72px 0}
+    section{padding:76px 0}
     .section-sand{background:var(--sand)}
-    .section-dark{background:#2d251e;color:#fff}
-    .grid-2,.cards,.rooms,.gallery,.footer-grid{
-      display:grid;gap:28px;
-    }
+    .section-dark{background:#2b241e;color:#fff}
+
     .label{
       margin:0 0 10px;
-      font-size:12px;font-weight:700;
-      letter-spacing:.24em;text-transform:uppercase;
-      color:#8c7353;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:#8b7354;
     }
-    .section-dark .label{color:#cfb997}
+    .section-dark .label{color:#d2be9e}
+
     h2{
       margin:0;
-      font-size:clamp(30px,4vw,48px);
+      font-size:clamp(30px, 4vw, 48px);
       line-height:1.12;
     }
-    .text{margin-top:18px;color:var(--muted)}
+    .text{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:17px;
+    }
     .section-dark .text{color:rgba(255,255,255,.82)}
 
-    .photo,.card img{
-      width:100%;border-radius:28px;object-fit:cover;
+    .grid-2,
+    .cards,
+    .rooms,
+    .gallery,
+    .footer-grid{
+      display:grid;
+      gap:28px;
     }
-    .photo-large{min-height:420px}
-    .photo-small{min-height:210px}
+
+    .photo{
+      width:100%;
+      object-fit:cover;
+      border-radius:28px;
+    }
+    .photo-large{min-height:430px}
+    .photo-small{min-height:206px}
+
+    .soft-box,
+    .price-box{
+      background:var(--paper);
+      border-radius:28px;
+      padding:22px;
+    }
+
+    .cards .soft-box h3,
+    .card h3{
+      margin:0;
+      font-size:28px;
+      line-height:1.15;
+    }
 
     .card{
       background:var(--paper);
       border-radius:28px;
       overflow:hidden;
     }
+    .card img{
+      width:100%;
+      height:280px;
+      object-fit:cover;
+    }
     .card-body{padding:22px}
-    .meta{font-size:14px;color:#8c7353;margin-bottom:10px}
-    .card h3{margin:0;font-size:28px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .meta{
+      font-size:14px;
+      color:#8b7354;
+      margin-bottom:10px;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
     .chip{
-      padding:7px 12px;border-radius:999px;
-      background:var(--sand);font-size:14px;color:#584737;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--sand);
+      color:#5a4737;
+      font-size:14px;
     }
-    .soft-box{
-      background:var(--paper);
-      border-radius:28px;
-      padding:22px;
-    }
-    .price-box{
-      background:var(--paper);
-      border-radius:28px;
-      padding:22px;
-    }
+
     .price-tile{
       background:var(--bg);
       border-radius:22px;
@@ -161,12 +249,17 @@
       margin-bottom:14px;
     }
     .price-title{
-      font-size:12px;font-weight:700;
-      letter-spacing:.18em;text-transform:uppercase;
-      color:#8c7353;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#8b7354;
     }
     .price{
-      margin-top:8px;font-size:34px;font-weight:700;
+      margin-top:8px;
+      font-size:34px;
+      font-weight:700;
+      line-height:1.1;
     }
 
     .footer{
@@ -174,19 +267,43 @@
       color:#f5ede2;
       padding:72px 0;
     }
-
-    @media (min-width:740px){
-      .hero-actions{flex-direction:row;max-width:none}
-      .benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-      .gallery{grid-template-columns:1.25fr .75fr}
-      .footer-grid{grid-template-columns:1.1fr .9fr}
+    .footer-note{
+      color:#d8cdbf;
+      margin-top:18px;
+    }
+    .footer .soft-box{
+      background:#f7f1e8;
+      color:var(--text);
     }
 
-    @media (min-width:900px){
+    @media (min-width:760px){
+      .hero-actions{
+        flex-direction:row;
+        max-width:none;
+      }
+      .hero-benefits{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .cards{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+      }
+      .gallery{
+        grid-template-columns:1.25fr .75fr;
+      }
+      .footer-grid{
+        grid-template-columns:1.1fr .9fr;
+      }
+    }
+
+    @media (min-width:960px){
       .nav{display:flex}
-      .grid-2{grid-template-columns:1.05fr .95fr;align-items:center}
-      .rooms{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-2{
+        grid-template-columns:1.05fr .95fr;
+        align-items:center;
+      }
+      .rooms{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
     }
   </style>
 </head>
@@ -194,182 +311,191 @@
 
   <header class="topbar">
     <div class="container topbar-inner">
-      <div>
-        <div class="brand-title">Vila Šebest</div>
-        <div class="brand-subtitle">Volary • Šumava</div>
-      </div>
+      <nav class="nav">
+        <a href="#onas">O nás</a>
+        <a href="#apartmany">Apartmány</a>
+        <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
+      </nav>
+
+      <a class="logo-wrap" href="#top" aria-label="Vila Šebest">
+        <img src="https://vilasebest.cz/wp-content/uploads/2025/07/sebest_lg.png" alt="Vila Šebest logo">
+      </a>
 
       <nav class="nav">
-        <a href="#apartmany">Apartmány</a>
         <a href="#galerie">Galerie</a>
         <a href="#cenik">Ceník</a>
         <a href="#kontakt">Kontakt</a>
-        <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">Ubytování ve Volarech na Šumavě</p>
-      <h1>Klidné místo pro pobyt, výlety a normální pohodu na Šumavě.</h1>
-      <p class="lead">
-        Dva samostatné apartmány, rodinná atmosféra, zahrada, parkování a příroda hned kolem.
-        Bez studeného hotelového dojmu a bez zbytečného hluku.
-      </p>
+  <main id="top">
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Zobrazit termíny a rezervovat</a>
-        <a class="btn btn-light" href="#apartmany">Prohlédnout apartmány</a>
-      </div>
-
-      <div class="benefits">
-        <div class="benefit">Dva samostatné apartmány až pro 12 hostů</div>
-        <div class="benefit">Soukromé oplocené parkování přímo u domu</div>
-        <div class="benefit">Úschovna kol a lyží</div>
-        <div class="benefit">Zahrada, pergola a možnost grilování</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container grid-2">
-      <div>
-        <p class="label">O vile</p>
-        <h2>Vychází ze současného webu, ale působí klidněji, čistěji a výrazně líp na mobilu.</h2>
-        <p class="text">
-          Směr není dělat hotelový katalog. Cíl je ukázat místo, atmosféru a jednoduchou cestu k rezervaci přes Trevlix.
-          Proto je nahoře silný vizuál, krátký text, pár jasných výhod a až potom apartmány a další obsah.
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Ubytování ve Volarech na Šumavě</p>
+        <h1>Klidné místo pro pobyt, výlety a normální pohodu na Šumavě.</h1>
+        <p class="lead">
+          Dva samostatné apartmány, rodinná atmosféra, zahrada, oplocené parkování
+          a příroda hned kolem. Jednoduché a příjemné zázemí pro páry, rodiny i menší skupiny.
         </p>
-      </div>
-      <div>
-        <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1763-1024x768.jpg" alt="Šumavská atmosféra a okolí Vila Šebest">
-      </div>
-    </div>
-  </section>
 
-  <section class="section-sand">
-    <div class="container">
-      <p class="label">Proč tenhle směr</p>
-      <h2>Homepage má prodávat pobyt a pocit místa, ne jen seznam pokojů.</h2>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Zobrazit termíny a rezervovat</a>
+          <a class="btn btn-light" href="#apartmany">Prohlédnout apartmány</a>
+        </div>
 
-      <div class="cards" style="margin-top:28px">
-        <div class="soft-box">
-          <h3>Klidné zázemí ve Volarech</h3>
-          <p class="text">Blízko výletů, kol i zimních tras. Místo, kde se dá přespat, odpočinout i normálně pobýt.</p>
-        </div>
-        <div class="soft-box">
-          <h3>Rodinná atmosféra</h3>
-          <p class="text">Ne anonymní apartmánový dům. Spíš příjemné zázemí pro páry, rodiny i menší skupiny.</p>
-        </div>
-        <div class="soft-box">
-          <h3>Jednoduchá rezervace</h3>
-          <p class="text">Web ukáže místo. Termín, obsazenost a finální cenu řeší přímo Trevlix.</p>
+        <div class="hero-benefits">
+          <div class="hero-benefit">Dva samostatné apartmány až pro 12 hostů</div>
+          <div class="hero-benefit">Soukromé oplocené parkování přímo u domu</div>
+          <div class="hero-benefit">Úschovna kol a lyží</div>
+          <div class="hero-benefit">Zahrada, pergola a možnost grilování</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="apartmany">
-    <div class="container">
-      <p class="label">Apartmány</p>
-      <h2>Dva apartmány, jasně odlišené a bez zbytečné složitosti.</h2>
+    <section id="onas">
+      <div class="container grid-2">
+        <div>
+          <p class="label">O nás</p>
+          <h2>Vychází ze současného webu, ale působí klidněji, čistěji a líp na mobilu.</h2>
+          <p class="text">
+            Smysl nového webu není udělat hotelový katalog. Cíl je ukázat místo,
+            atmosféru a jednoduše dovést návštěvníka k rezervaci přes Trevlix.
+            Proto je nahoře silný úvod, krátký text, pár hlavních výhod a až potom apartmány a další obsah.
+          </p>
+        </div>
+        <div>
+          <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1763-1024x768.jpg" alt="Šumavská atmosféra a okolí Vila Šebest">
+        </div>
+      </div>
+    </section>
 
-      <div class="rooms" style="margin-top:28px">
-        <article class="card">
-          <img src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Malý apartmán Vila Šebest">
-          <div class="card-body">
-            <div class="meta">27 m² • pro 2 osoby + dítě do 3 let</div>
-            <h3>Malý apartmán</h3>
-            <p class="text">V přízemí, se samostatným vstupem, kuchyňkou, koupelnou s vanou a klidnějším soukromým zázemím.</p>
-            <div class="chips">
-              <span class="chip">vhodné pro pár</span>
-              <span class="chip">kuchyňka</span>
-              <span class="chip">Wi-Fi a pračka</span>
-            </div>
+    <section class="section-sand">
+      <div class="container">
+        <p class="label">Proč tenhle směr</p>
+        <h2>Homepage má prodávat pobyt a pocit místa, ne jen seznam pokojů.</h2>
+
+        <div class="cards" style="margin-top:28px">
+          <div class="soft-box">
+            <h3>Klidné zázemí ve Volarech</h3>
+            <p class="text">Blízko výletů, kol i zimních tras. Místo, kde se dá přespat, odpočinout i normálně pobýt.</p>
           </div>
-        </article>
-
-        <article class="card">
-          <img src="https://vilasebest.cz/wp-content/uploads/2025/09/Apartman-1-1024x576.jpg" alt="Velký apartmán Vila Šebest">
-          <div class="card-body">
-            <div class="meta">110 m² • až pro 8 osob + možnost přistýlek</div>
-            <h3>Velký apartmán</h3>
-            <p class="text">Horní patro se třemi ložnicemi, kuchyní, společenskou částí a prostorem pro rodiny nebo partu přátel.</p>
-            <div class="chips">
-              <span class="chip">3 ložnice</span>
-              <span class="chip">více koupelen</span>
-              <span class="chip">ideální pro rodiny</span>
-            </div>
+          <div class="soft-box">
+            <h3>Rodinná atmosféra</h3>
+            <p class="text">Ne anonymní apartmánový katalog. Spíš příjemné zázemí pro páry, rodiny i menší skupiny.</p>
           </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="galerie" class="section-dark">
-    <div class="container">
-      <p class="label">Galerie a atmosféra</p>
-      <h2>První návrh už používá reálné fotky ze současného webu.</h2>
-
-      <div class="gallery" style="margin-top:28px">
-        <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/08/98F48EC3-6A46-44DA-8308-4142CB5AF1F1-1024x768-1.jpg" alt="Zahrada a venkovní zázemí Vila Šebest">
-        <div style="display:grid;gap:20px">
-          <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/09/Koupelna-apartman-1-1024x683.jpg" alt="Koupelna apartmánu Vila Šebest">
-          <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Interiér apartmánu Vila Šebest">
+          <div class="soft-box">
+            <h3>Jednoduchá rezervace</h3>
+            <p class="text">Web ukáže místo. Termín, obsazenost a finální cenu řeší přímo Trevlix.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="cenik">
-    <div class="container grid-2">
-      <div>
-        <p class="label">Ceník a rezervace</p>
-        <h2>Ceny stručně. Přesný termín a částka až v Trevlixu.</h2>
-        <p class="text">
-          Na homepage nemá smysl člověka zahltit dlouhou tabulkou. Stačí základ a jasný přechod do rezervace.
-          Tak je to přehlednější a lepší i na mobilu.
-        </p>
+    <section id="apartmany">
+      <div class="container">
+        <p class="label">Apartmány</p>
+        <h2>Dva apartmány, jasně odlišené a bez zbytečné složitosti.</h2>
+
+        <div class="rooms" style="margin-top:28px">
+          <article class="card">
+            <img src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Malý apartmán Vila Šebest">
+            <div class="card-body">
+              <div class="meta">27 m² • pro 2 osoby + dítě do 3 let</div>
+              <h3>Malý apartmán</h3>
+              <p class="text">V přízemí, se samostatným vstupem, kuchyňkou, koupelnou s vanou a klidnějším soukromým zázemím.</p>
+              <div class="chips">
+                <span class="chip">vhodné pro pár</span>
+                <span class="chip">kuchyňka</span>
+                <span class="chip">Wi-Fi a pračka</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://vilasebest.cz/wp-content/uploads/2025/09/Apartman-1-1024x576.jpg" alt="Velký apartmán Vila Šebest">
+            <div class="card-body">
+              <div class="meta">110 m² • až pro 8 osob + možnost přistýlek</div>
+              <h3>Velký apartmán</h3>
+              <p class="text">Horní patro se třemi ložnicemi, kuchyní, společenskou částí a prostorem pro rodiny nebo partu přátel.</p>
+              <div class="chips">
+                <span class="chip">3 ložnice</span>
+                <span class="chip">více koupelen</span>
+                <span class="chip">ideální pro rodiny</span>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="price-box">
-        <div class="price-tile">
-          <div class="price-title">Malý apartmán</div>
-          <div class="price">od 1 210 Kč</div>
-          <p class="text">Pro 1–2 osoby, samostatný vstup, kuchyňka, vana, pračka, Wi-Fi.</p>
+    <section id="galerie" class="section-dark">
+      <div class="container">
+        <p class="label">Galerie</p>
+        <h2>První návrh už používá reálné fotky ze současného webu.</h2>
+
+        <div class="gallery" style="margin-top:28px">
+          <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/08/98F48EC3-6A46-44DA-8308-4142CB5AF1F1-1024x768-1.jpg" alt="Zahrada a venkovní zázemí Vila Šebest">
+          <div style="display:grid;gap:20px">
+            <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/09/Koupelna-apartman-1-1024x683.jpg" alt="Koupelna apartmánu Vila Šebest">
+            <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Interiér apartmánu Vila Šebest">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cenik">
+      <div class="container grid-2">
+        <div>
+          <p class="label">Ceník</p>
+          <h2>Ceny stručně. Přesný termín a částka až v Trevlixu.</h2>
+          <p class="text">
+            Na homepage nemá smysl člověka zahltit dlouhou tabulkou.
+            Stačí základ a jasný přechod do rezervace. Tak je to přehlednější a lepší i na mobilu.
+          </p>
         </div>
 
-        <div class="price-tile">
-          <div class="price-title">Velký apartmán</div>
-          <div class="price">od 2 100 Kč</div>
-          <p class="text">Pro rodiny a skupiny, 3 ložnice, kuchyně, společenský prostor a zahrada.</p>
+        <div class="price-box">
+          <div class="price-tile">
+            <div class="price-title">Malý apartmán</div>
+            <div class="price">od 1 210 Kč</div>
+            <p class="text">Pro 1–2 osoby, samostatný vstup, kuchyňka, vana, pračka, Wi-Fi.</p>
+          </div>
+
+          <div class="price-tile">
+            <div class="price-title">Velký apartmán</div>
+            <div class="price">od 2 100 Kč</div>
+            <p class="text">Pro rodiny a skupiny, 3 ložnice, kuchyně, společenský prostor a zahrada.</p>
+          </div>
+
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px">
+            <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Otevřít Trevlix</a>
+            <a class="btn btn-ghost" href="https://vilasebest.cz/cenik/" target="_blank">Současný ceník</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="kontakt" class="footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="label">Kontakt</p>
+          <h2>Rodinné ubytování ve Volarech na Šumavě.</h2>
+          <p class="footer-note">
+            Testovací verze pro průběžné úpravy a zkoušení bokem, bez zásahu do ostrého webu.
+          </p>
         </div>
 
-        <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px">
-          <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Otevřít Trevlix</a>
-          <a class="btn" style="border:1px solid var(--line)" href="https://vilasebest.cz/cenik/" target="_blank">Současný ceník</a>
+        <div class="soft-box">
+          <h3 style="margin-top:0">Další krok</h3>
+          <p class="text">
+            Až bude sedět homepage, upravíme detail apartmánů a potom uděláme samostatnou stránku Masáže.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
 
-  <footer id="kontakt" class="footer">
-    <div class="container footer-grid">
-      <div>
-        <p class="label">Vila Šebest</p>
-        <h2>Rodinné ubytování ve Volarech na Šumavě.</h2>
-        <p style="color:#d8cdbf;margin-top:18px">
-          Testovací verze pro průběžné úpravy a zkoušení bokem, bez zásahu do ostrého webu.
-        </p>
-      </div>
-
-      <div class="soft-box">
-        <h3 style="margin-top:0;color:#2f261f">Další krok později</h3>
-        <p class="text">Po zprovoznění testovací adresy budeme upravovat homepage, pak apartmány a nakonec samostatnou stránku Masáže.</p>
-      </div>
-    </div>
-  </footer>
-
+  </main>
 </body>
 </html>
