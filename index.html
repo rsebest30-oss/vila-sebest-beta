@@ -24,7 +24,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       color:var(--text);
       background:var(--bg);
       line-height:1.6;
@@ -48,28 +48,46 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
-      padding:14px 0;
+      gap:16px;
+      padding:10px 0;
     }
+
     .logo-wrap{
       display:flex;
       align-items:center;
       justify-content:center;
-      min-width:170px;
+      flex:0 0 auto;
     }
     .logo-wrap img{
-      height:82px;
+      height:72px;
       width:auto;
     }
 
-    .nav{
+    .desktop-nav{
       display:none;
       align-items:center;
-      gap:24px;
+      gap:22px;
       font-size:16px;
       font-weight:600;
     }
-    .nav a:hover{color:var(--brown)}
+    .desktop-nav a:hover{color:var(--brown)}
+
+    .mobile-nav{
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      white-space:nowrap;
+      padding:10px 0 12px;
+      border-top:1px solid var(--line);
+      font-size:14px;
+      font-weight:700;
+    }
+    .mobile-nav a{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#efe5d6;
+    }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -79,7 +97,6 @@
       font-weight:700;
       transition:.2s ease;
     }
-    .btn:hover{transform:translateY(-1px)}
     .btn-primary{
       background:var(--brown);
       color:#fff;
@@ -98,39 +115,39 @@
 
     .hero{
       position:relative;
-      min-height:84vh;
+      min-height:520px;
       display:flex;
       align-items:flex-end;
       overflow:hidden;
       background:
-        linear-gradient(rgba(20,17,14,.26), rgba(20,17,14,.56)),
-        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop') center 62%/cover no-repeat;
+        linear-gradient(rgba(20,17,14,.24), rgba(20,17,14,.54)),
+        url('Bez názvu.bmp') center center/cover no-repeat;
     }
     .hero-inner{
       position:relative;
       z-index:2;
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
-      padding:88px 0 46px;
+      padding:48px 0 34px;
       color:#fff;
     }
     .eyebrow{
-      margin:0 0 12px;
+      margin:0 0 10px;
       font-size:12px;
       font-weight:700;
-      letter-spacing:.28em;
+      letter-spacing:.24em;
       text-transform:uppercase;
       opacity:.92;
     }
     h1{
       margin:0;
-      max-width:800px;
-      font-size:clamp(38px, 7vw, 72px);
-      line-height:1.03;
+      max-width:760px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.04;
     }
     .lead{
-      margin-top:18px;
-      max-width:710px;
+      margin-top:14px;
+      max-width:690px;
       font-size:18px;
       color:rgba(255,255,255,.92);
     }
@@ -138,16 +155,16 @@
       display:flex;
       flex-direction:column;
       gap:12px;
-      margin-top:28px;
+      margin-top:22px;
       max-width:430px;
     }
     .hero-benefits{
       display:grid;
-      gap:12px;
-      margin-top:28px;
+      gap:10px;
+      margin-top:22px;
     }
     .hero-benefit{
-      padding:13px 16px;
+      padding:12px 14px;
       border-radius:18px;
       background:rgba(255,255,255,.11);
       border:1px solid rgba(255,255,255,.14);
@@ -155,7 +172,7 @@
       font-size:15px;
     }
 
-    section{padding:76px 0}
+    section{padding:64px 0}
     .section-sand{background:var(--sand)}
     .section-dark{background:#2b241e;color:#fff}
 
@@ -171,11 +188,11 @@
 
     h2{
       margin:0;
-      font-size:clamp(30px, 4vw, 48px);
+      font-size:clamp(28px, 4vw, 46px);
       line-height:1.12;
     }
     .text{
-      margin-top:18px;
+      margin-top:16px;
       color:var(--muted);
       font-size:17px;
     }
@@ -195,7 +212,7 @@
       object-fit:cover;
       border-radius:28px;
     }
-    .photo-large{min-height:430px}
+    .photo-large{min-height:420px}
     .photo-small{min-height:206px}
 
     .soft-box,
@@ -296,7 +313,8 @@
     }
 
     @media (min-width:960px){
-      .nav{display:flex}
+      .desktop-nav{display:flex}
+      .mobile-nav{display:none}
       .grid-2{
         grid-template-columns:1.05fr .95fr;
         align-items:center;
@@ -311,7 +329,7 @@
 
   <header class="topbar">
     <div class="container topbar-inner">
-      <nav class="nav">
+      <nav class="desktop-nav">
         <a href="#onas">O nás</a>
         <a href="#apartmany">Apartmány</a>
         <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
@@ -321,11 +339,20 @@
         <img src="https://vilasebest.cz/wp-content/uploads/2025/07/sebest_lg.png" alt="Vila Šebest logo">
       </a>
 
-      <nav class="nav">
+      <nav class="desktop-nav">
         <a href="#galerie">Galerie</a>
         <a href="#cenik">Ceník</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
+    </div>
+
+    <div class="container mobile-nav">
+      <a href="#onas">O nás</a>
+      <a href="#apartmany">Apartmány</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#cenik">Ceník</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
     </div>
   </header>
 
