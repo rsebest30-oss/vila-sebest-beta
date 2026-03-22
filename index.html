@@ -1,589 +1,680 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
-    <title>Vila Šebest – Klidné ubytování ve Volarech na Šumavě</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Georgia', serif; 
-            background: #faf8f3; 
-            color: #3a3a3a; 
-            line-height: 1.7;
-        }
-        
-        header {
-            background: #fff;
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #6b5344;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 35px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: #3a3a3a;
-            font-size: 15px;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #8b7355;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 100%), 
-                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&h=700&fit=crop') center/cover no-repeat;
-            color: #fff;
-            padding: 120px 20px;
-            text-align: center;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-            font-weight: normal;
-            letter-spacing: 1px;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            max-width: 600px;
-            opacity: 0.95;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 13px 35px;
-            background: #8b7355;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 15px;
-            transition: background 0.3s;
-            border: none;
-            cursor: pointer;
-            font-family: 'Georgia', serif;
-        }
-        
-        .btn:hover {
-            background: #6b5344;
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #fff;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 80px 20px;
-        }
-        
-        h2 {
-            font-size: 38px;
-            margin-bottom: 50px;
-            color: #3a3a3a;
-            font-weight: normal;
-            text-align: center;
-        }
-        
-        .section-dark {
-            background: #3a3a3a;
-            color: #f5f1ed;
-        }
-        
-        .section-dark h2 {
-            color: #f5f1ed;
-        }
-        
-        .section-light {
-            background: #faf8f3;
-        }
-        
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-        
-        .card {
-            background: #fff;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        .card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .card-body {
-            padding: 30px;
-        }
-        
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #6b5344;
-            font-weight: normal;
-        }
-        
-        .card p {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-        
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #8b7355;
-            margin-bottom: 20px;
-        }
-        
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-top: 50px;
-        }
-        
-        .grid-2 img {
-            width: 100%;
-            border-radius: 6px;
-        }
-        
-        .grid-2 h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #3a3a3a;
-            font-weight: normal;
-        }
-        
-        form {
-            background: #fff;
-            padding: 40px;
-            border-radius: 6px;
-            max-width: 500px;
-            margin: 40px auto 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        
-        form input,
-        form select,
-        form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Georgia', serif;
-            font-size: 14px;
-        }
-        
-        form textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .timetable {
-            background: #fff;
-            padding: 30px;
-            border-radius: 6px;
-            margin-top: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        
-        .timetable h4 {
-            margin-bottom: 20px;
-            color: #6b5344;
-            font-weight: normal;
-        }
-        
-        .time-slots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .time-slot {
-            padding: 12px;
-            border: 2px solid #e0d5c7;
-            border-radius: 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #faf8f3;
-        }
-        
-        .time-slot:hover {
-            border-color: #8b7355;
-            background: #f5f1ed;
-        }
-        
-        .time-slot.selected {
-            background: #8b7355;
-            color: #fff;
-            border-color: #8b7355;
-        }
-        
-        footer {
-            background: #3a3a3a;
-            color: #f5f1ed;
-            padding: 60px 20px 40px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
-        
-        .footer-content h4 {
-            margin-bottom: 15px;
-            font-weight: normal;
-            font-size: 16px;
-        }
-        
-        .footer-content p {
-            font-size: 14px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-        
-        .footer-content a {
-            color: #f5f1ed;
-            text-decoration: none;
-        }
-        
-        .footer-content a:hover {
-            text-decoration: underline;
-        }
-        
-        .divider {
-            border-top: 1px solid rgba(245,241,237,0.2);
-            padding-top: 30px;
-            margin-top: 30px;
-            font-size: 13px;
-            opacity: 0.8;
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            h2 {
-                font-size: 28px;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            form {
-                padding: 25px;
-            }
-            
-            .time-slots {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vila Šebest – Volary, Šumava</title>
+  <meta name="description" content="Klidné ubytování ve Volarech na Šumavě. Dva samostatné apartmány, zahrada, oplocené parkování a rezervace přes Trevlix." />
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg:#f6f1e8;
+      --paper:#fbf7f1;
+      --sand:#ede2d1;
+      --line:#ddcfbb;
+      --text:#2c241d;
+      --muted:#6d5a48;
+      --brown:#7b5f3b;
+      --brown-dark:#5f472d;
+      --dark:#231c16;
+      --white:#ffffff;
+      --max:1120px;
+      --shadow:0 10px 30px rgba(44,36,29,.08);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(246,241,232,.96);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(10px);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      min-height:86px;
+      padding:8px 0;
+    }
+
+    .logo-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+
+    .logo-wrap img{
+      height:72px;
+      width:auto;
+    }
+
+    .desktop-nav{
+      display:none;
+      align-items:center;
+      gap:24px;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .desktop-nav a:hover{color:var(--brown)}
+
+    .header-cta{
+      display:none;
+    }
+
+    .menu-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--paper);
+      cursor:pointer;
+      flex-direction:column;
+      gap:5px;
+      box-shadow:none;
+    }
+
+    .menu-toggle span{
+      width:18px;
+      height:2px;
+      background:var(--text);
+      border-radius:2px;
+    }
+
+    .mobile-panel{
+      display:none;
+      border-top:1px solid var(--line);
+      padding:10px 0 14px;
+    }
+
+    .mobile-panel.open{
+      display:block;
+    }
+
+    .mobile-nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .mobile-nav a{
+      padding:12px 14px;
+      border-radius:16px;
+      background:#efe5d7;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:13px 22px;
+      font-weight:700;
+      transition:.2s ease;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--brown);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--brown-dark);
+    }
+
+    .btn-light{
+      color:#fff;
+      border:1px solid rgba(255,255,255,.45);
+      background:rgba(255,255,255,.08);
+    }
+
+    .btn-ghost{
+      border:1px solid var(--line);
+      color:var(--text);
+      background:transparent;
+    }
+
+    .hero{
+      position:relative;
+      min-height:560px;
+      overflow:hidden;
+      background:#b7afa6;
+    }
+
+    .hero-image{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(rgba(22,18,14,.22), rgba(22,18,14,.58));
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:flex-end;
+      min-height:560px;
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      padding:40px 0 36px;
+      color:#fff;
+    }
+
+    .hero-content{
+      max-width:790px;
+    }
+
+    .eyebrow{
+      margin:0 0 10px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      opacity:.92;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(34px, 6vw, 70px);
+      line-height:1.03;
+    }
+
+    .lead{
+      margin-top:14px;
+      max-width:690px;
+      font-size:18px;
+      color:rgba(255,255,255,.92);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:24px;
+      max-width:430px;
+    }
+
+    .hero-benefits{
+      display:grid;
+      gap:10px;
+      margin-top:24px;
+    }
+
+    .hero-benefit{
+      padding:12px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      color:#f8f2e9;
+      font-size:15px;
+    }
+
+    section{padding:68px 0}
+    .section-sand{background:var(--sand)}
+    .section-dark{background:#2b241e;color:#fff}
+
+    .label{
+      margin:0 0 10px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:#8b7354;
+    }
+
+    .section-dark .label{color:#d1bd9f}
+
+    h2{
+      margin:0;
+      font-size:clamp(28px, 4vw, 46px);
+      line-height:1.12;
+    }
+
+    .text{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .section-dark .text{
+      color:rgba(255,255,255,.82);
+    }
+
+    .grid-2,
+    .rooms,
+    .gallery,
+    .footer-grid,
+    .info-cards{
+      display:grid;
+      gap:28px;
+    }
+
+    .photo{
+      width:100%;
+      object-fit:cover;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .photo-large{min-height:420px}
+    .photo-small{min-height:206px}
+
+    .card,
+    .soft-box,
+    .price-box{
+      background:var(--paper);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .soft-box,
+    .price-box{
+      padding:22px;
+    }
+
+    .info-card{
+      background:var(--paper);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .info-card h3,
+    .card h3{
+      margin:0;
+      font-size:28px;
+      line-height:1.15;
+    }
+
+    .card img{
+      width:100%;
+      height:280px;
+      object-fit:cover;
+    }
+
+    .card-body{
+      padding:22px;
+    }
+
+    .meta{
+      font-size:14px;
+      color:#8b7354;
+      margin-bottom:10px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
+
+    .chip{
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--sand);
+      color:#5a4737;
+      font-size:14px;
+    }
+
+    .price-tile{
+      background:var(--bg);
+      border-radius:22px;
+      padding:18px;
+      margin-bottom:14px;
+    }
+
+    .price-title{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#8b7354;
+    }
+
+    .price{
+      margin-top:8px;
+      font-size:34px;
+      font-weight:700;
+      line-height:1.1;
+    }
+
+    .list{
+      margin:16px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    .footer{
+      background:var(--dark);
+      color:#f5ede2;
+      padding:64px 0;
+    }
+
+    .footer-note{
+      color:#d8cdbf;
+      margin-top:16px;
+    }
+
+    .footer .soft-box{
+      background:#f7f1e8;
+      color:var(--text);
+    }
+
+    @media (min-width:760px){
+      .hero-actions{
+        flex-direction:row;
+        max-width:none;
+      }
+
+      .hero-benefits{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+
+      .info-cards{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+      }
+
+      .gallery{
+        grid-template-columns:1.25fr .75fr;
+      }
+
+      .footer-grid{
+        grid-template-columns:1.1fr .9fr;
+      }
+    }
+
+    @media (min-width:980px){
+      .desktop-nav{display:flex}
+      .header-cta{display:inline-flex}
+      .menu-toggle{display:none}
+      .mobile-panel{display:none !important}
+
+      .grid-2{
+        grid-template-columns:1.05fr .95fr;
+        align-items:center;
+      }
+
+      .rooms{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+
+      .topbar-inner{
+        min-height:94px;
+      }
+
+      .logo-wrap img{
+        height:82px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <div class="header-inner">
-        <div class="logo">Vila Šebest</div>
-        <nav>
-            <ul>
-                <li><a href="#apartmany">Apartmány</a></li>
-                <li><a href="#masaze">Masáže</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <nav class="desktop-nav">
+        <a href="#ubytovani">Ubytování</a>
+        <a href="#apartmany">Apartmány</a>
+        <a href="#galerie">Galerie</a>
+      </nav>
 
-<section class="hero">
-    <h1>Vila Šebest</h1>
-    <p>Klidné ubytování ve Volarech na Šumavě</p>
-    <div class="hero-buttons">
-        <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" class="btn" target="_blank">Rezervovat ubytování</a>
-        <a href="#masaze" class="btn btn-secondary">Masáže</a>
-    </div>
-</section>
+      <a class="logo-wrap" href="#top" aria-label="Vila Šebest">
+        <img src="https://vilasebest.cz/wp-content/uploads/2025/07/sebest_lg.png" alt="Vila Šebest logo">
+      </a>
 
-<section id="apartmany" class="section-light">
-    <div class="container">
-        <h2>Apartmány</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=350&fit=crop" alt="Malý apartmán">
-                <div class="card-body">
-                    <h3>Malý apartmán</h3>
-                    <p>27 m² • pro 2 osoby + dítě do 3 let</p>
-                    <p>V přízemí, se samostatným vstupem, kuchyňkou, koupelnou s vanou a klidným soukromým zázemím.</p>
-                    <div class="price">Od 1 210 Kč / noc</div>
-                    <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" class="btn" target="_blank">Rezervovat</a>
-                </div>
-            </div>
-            
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=350&fit=crop" alt="Velký apartmán">
-                <div class="card-body">
-                    <h3>Velký apartmán</h3>
-                    <p>110 m² • až pro 8 osob + možnost přistýlek</p>
-                    <p>Horní patro se třemi ložnicemi, kuchyní, společenskou částí a prostorem pro rodiny nebo partu přátel.</p>
-                    <div class="price">Od 2 100 Kč / noc</div>
-                    <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" class="btn" target="_blank">Rezervovat</a>
-                </div>
-            </div>
+      <nav class="desktop-nav">
+        <a href="#cenik">Ceník</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobilePanel">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="container mobile-panel" id="mobilePanel">
+      <nav class="mobile-nav">
+        <a href="#ubytovani">Ubytování</a>
+        <a href="#apartmany">Apartmány</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#cenik">Ceník</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervace</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <img class="hero-image" src="hero-sumava.jpg" alt="Šumavská krajina" />
+      <div class="hero-overlay"></div>
+
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="eyebrow">Klidné ubytování ve Volarech na Šumavě</p>
+          <h1>Pohodové zázemí pro pobyt, výlety a odpočinek na Šumavě.</h1>
+          <p class="lead">
+            Dva samostatné apartmány, zahrada, oplocené parkování a příjemné zázemí
+            pro páry, rodiny i menší skupiny.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Zobrazit termíny a rezervovat</a>
+            <a class="btn btn-light" href="#apartmany">Prohlédnout apartmány</a>
+          </div>
+
+          <div class="hero-benefits">
+            <div class="hero-benefit">Dva samostatné apartmány až pro 12 hostů</div>
+            <div class="hero-benefit">Soukromé oplocené parkování přímo u domu</div>
+            <div class="hero-benefit">Úschovna kol a lyží</div>
+            <div class="hero-benefit">Zahrada, pergola a možnost grilování</div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section id="masaze" class="section-dark">
-    <div class="container">
-        <h2>Masáže</h2>
-        <p style="text-align: center; font-size: 16px; margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;">Uvolňující masáže přímo do vaší ubytovny. Objednejte si relaxaci, kterou si zasloužíte.</p>
-        
-        <div class="cards">
-            <div class="card">
-                <div class="card-body">
-                    <h3>Masáž šíje a zad</h3>
-                    <p style="color: #999;">30 min – 500 Kč | 60 min – 800 Kč</p>
-                    <p>Uvolnění svalového napětí v problemových oblastech. Ideální po cestě nebo dlouhém sezení.</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-body">
-                    <h3>Relaxační masáž</h3>
-                    <p style="color: #999;">60 min – 900 Kč | 90 min – 1 200 Kč</p>
-                    <p>Celotělová relaxace pro uvolnění a odpočinek. Klidný rytmus, příjemné pohyby.</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-body">
-                    <h3>Sportovní masáž</h3>
-                    <p style="color: #999;">60 min – 900 Kč | 90 min – 1 300 Kč</p>
-                    <p>Intenzivnější varianta pro regeneraci svalů. Vhodná po aktivním odpočinku.</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-body">
-                    <h3>Uvolňující masáž zad</h3>
-                    <p style="color: #999;">30 min – 500 Kč | 60 min – 800 Kč</p>
-                    <p>Zaměřená masáž zad pro uvolnění a zlepšení pohyblivosti.</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-body">
-                    <h3>Regenerační masáž</h3>
-                    <p style="color: #999;">60 min – 900 Kč</p>
-                    <p>Speciální technika pro podporu regenerace a zlepšení krevního oběhu.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="timetable">
-            <h4>📅 Volné termíny</h4>
-            <form action="mailto:rsebest31@gmail.com" method="POST" enctype="text/plain">
-                <input type="text" name="jmeno" placeholder="Vaše jméno" required>
-                <input type="email" name="email" placeholder="E-mail" required>
-                <input type="tel" name="tel" placeholder="Telefon" required>
-                <input type="date" name="datum" required>
-                
-                <label style="display: block; margin-bottom: 10px; font-size: 14px;">Vyber čas:</label>
-                <div class="time-slots" id="times">
-                    <div class="time-slot" onclick="selectTime(this, '10:00')">10:00</div>
-                    <div class="time-slot" onclick="selectTime(this, '11:00')">11:00</div>
-                    <div class="time-slot" onclick="selectTime(this, '14:00')">14:00</div>
-                    <div class="time-slot" onclick="selectTime(this, '15:00')">15:00</div>
-                    <div class="time-slot" onclick="selectTime(this, '16:00')">16:00</div>
-                    <div class="time-slot" onclick="selectTime(this, '17:00')">17:00</div>
-                </div>
-                <input type="hidden" name="cas" id="selectedTime" required>
-                
-                <select name="masaz" required>
-                    <option value="">Vyberte typ masáže</option>
-                    <option value="Masáž šíje a zad - 30 min (500 Kč)">Masáž šíje a zad - 30 min (500 Kč)</option>
-                    <option value="Masáž šíje a zad - 60 min (800 Kč)">Masáž šíje a zad - 60 min (800 Kč)</option>
-                    <option value="Relaxační masáž - 60 min (900 Kč)">Relaxační masáž - 60 min (900 Kč)</option>
-                    <option value="Relaxační masáž - 90 min (1 200 Kč)">Relaxační masáž - 90 min (1 200 Kč)</option>
-                    <option value="Sportovní masáž - 60 min (900 Kč)">Sportovní masáž - 60 min (900 Kč)</option>
-                    <option value="Sportovní masáž - 90 min (1 300 Kč)">Sportovní masáž - 90 min (1 300 Kč)</option>
-                    <option value="Uvolňující masáž zad - 30 min (500 Kč)">Uvolňující masáž zad - 30 min (500 Kč)</option>
-                    <option value="Uvolňující masáž zad - 60 min (800 Kč)">Uvolňující masáž zad - 60 min (800 Kč)</option>
-                    <option value="Regenerační masáž - 60 min (900 Kč)">Regenerační masáž - 60 min (900 Kč)</option>
-                </select>
-                
-                <textarea name="poznamky" placeholder="Poznámky (alergie, zdravotní problémy apod.)"></textarea>
-                <button type="submit" class="btn" style="width: 100%;">Objednat masáž</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<section id="galerie" class="section-light">
-    <div class="container">
-        <h2>Galerie</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=350&fit=crop" alt="Vila a okolí">
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1631049307038-da0ec422d003?w=500&h=350&fit=crop" alt="Terasa a výhled">
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=350&fit=crop" alt="Interiér">
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=350&fit=crop" alt="Pokoj">
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=350&fit=crop" alt="Koupelna">
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=350&fit=crop" alt="Zahrada">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="kontakt" class="section-dark">
-    <div class="container">
-        <h2>Kontakt</h2>
-        <div style="text-align: center; max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.8;">
-            <p><strong>Vila Šebest</strong></p>
-            <p>Volary, Šumava</p>
-            <p>📞 <a href="tel:444444444" style="color: inherit;">444 444 444</a></p>
-            <p>📧 <a href="mailto:rsebest31@gmail.com" style="color: inherit;">rsebest31@gmail.com</a></p>
-            <p style="margin-top: 30px; font-size: 14px; opacity: 0.8;">Rezervace ubytování přes <a href="https://book.trevlix.com/book/app/?cid=8100968" target="_blank" style="color: inherit; text-decoration: underline;">Trevlix</a></p>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-content">
+    <section id="ubytovani">
+      <div class="container grid-2">
         <div>
-            <h4>Vila Šebest</h4>
-            <p>Klidné ubytování a masáže na Šumavě. Rodinná atmosféra, přírodní okolí, jednoduché a příjemné zázemí.</p>
+          <p class="label">Ubytování</p>
+          <h2>Rodinné zázemí ve Volarech, blízko výletů, kol i zimních tras.</h2>
+          <p class="text">
+            Vila Šebest nabízí dva samostatné apartmány. Ubytování je vhodné pro páry,
+            rodiny i menší skupiny, které chtějí být na Šumavě v klidu a přitom blízko všemu důležitému.
+          </p>
         </div>
         <div>
-            <h4>Ubytování</h4>
-            <p><a href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Rezervovat apartmán</a></p>
-            <p><a href="#apartmany">Detaily apartmánů</a></p>
+          <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1763-1024x768.jpg" alt="Okolí Vila Šebest a Šumava">
         </div>
+      </div>
+    </section>
+
+    <section class="section-sand">
+      <div class="container">
+        <p class="label">Proč k nám</p>
+        <h2>Jednoduché, příjemné a praktické ubytování na Šumavě.</h2>
+
+        <div class="info-cards" style="margin-top:28px">
+          <div class="info-card">
+            <h3>Dobrá poloha</h3>
+            <p class="text">Volary jsou skvělý výchozí bod pro výlety, kolo, běžky i klidný pobyt.</p>
+          </div>
+          <div class="info-card">
+            <h3>Rodinná atmosféra</h3>
+            <p class="text">Ne anonymní hotel. Spíš příjemné zázemí, kam člověk přijede a je mu tam dobře.</p>
+          </div>
+          <div class="info-card">
+            <h3>Rezervace bez složitostí</h3>
+            <p class="text">Obsazenost, termíny i finální cena běží jednoduše přes Trevlix.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apartmany">
+      <div class="container">
+        <p class="label">Apartmány</p>
+        <h2>Dva apartmány, každý pro jiný typ pobytu.</h2>
+
+        <div class="rooms" style="margin-top:28px">
+          <article class="card">
+            <img src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Malý apartmán Vila Šebest">
+            <div class="card-body">
+              <div class="meta">Malý apartmán • 27 m²</div>
+              <h3>Malý apartmán</h3>
+              <p class="text">Přízemní apartmán pro klidnější pobyt ve dvou, s vlastním zázemím a kuchyňkou.</p>
+              <div class="chips">
+                <span class="chip">pro 2 osoby</span>
+                <span class="chip">kuchyňka</span>
+                <span class="chip">vana</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://vilasebest.cz/wp-content/uploads/2025/09/Apartman-1-1024x576.jpg" alt="Velký apartmán Vila Šebest">
+            <div class="card-body">
+              <div class="meta">Velký apartmán • 110 m²</div>
+              <h3>Velký apartmán</h3>
+              <p class="text">Pro rodiny a menší skupiny, s více ložnicemi a větším prostorem pro společný pobyt.</p>
+              <div class="chips">
+                <span class="chip">až pro 8 osob</span>
+                <span class="chip">3 ložnice</span>
+                <span class="chip">více koupelen</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie" class="section-dark">
+      <div class="container">
+        <p class="label">Galerie</p>
+        <h2>Ukázka zázemí a atmosféry.</h2>
+
+        <div class="gallery" style="margin-top:28px">
+          <img class="photo photo-large" src="https://vilasebest.cz/wp-content/uploads/2025/08/98F48EC3-6A46-44DA-8308-4142CB5AF1F1-1024x768-1.jpg" alt="Zahrada a venkovní zázemí Vila Šebest">
+          <div style="display:grid;gap:20px">
+            <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/09/Koupelna-apartman-1-1024x683.jpg" alt="Koupelna apartmánu Vila Šebest">
+            <img class="photo photo-small" src="https://vilasebest.cz/wp-content/uploads/2025/05/IMG_1515-1024x768.jpg" alt="Interiér apartmánu Vila Šebest">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cenik">
+      <div class="container grid-2">
         <div>
-            <h4>Masáže</h4>
-            <p><a href="#masaze">Objednat masáž</a></p>
-            <p><a href="mailto:rsebest31@gmail.com">rsebest31@gmail.com</a></p>
+          <p class="label">Ceník</p>
+          <h2>Cena stručně, přesný termín a částka v rezervačním systému.</h2>
+          <p class="text">
+            Základní přehled stačí ukázat tady. Aktuální termín, obsazenost a finální cenu
+            uvidí návštěvník po kliknutí v Trevlixu.
+          </p>
         </div>
-    </div>
-    <div class="divider">
-        <p>&copy; 2026 Vila Šebest. Všechna práva vyhrazena. | Testovací verze</p>
-    </div>
-</footer>
 
-<script>
-function selectTime(element, time) {
-    document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
-    document.getElementById('selectedTime').value = time;
-}
-</script>
+        <div class="price-box">
+          <div class="price-tile">
+            <div class="price-title">Malý apartmán</div>
+            <div class="price">od 1 210 Kč</div>
+            <p class="text">Vhodné pro pobyt ve dvou, s vlastním zázemím a kuchyňkou.</p>
+          </div>
 
+          <div class="price-tile">
+            <div class="price-title">Velký apartmán</div>
+            <div class="price">od 2 100 Kč</div>
+            <p class="text">Pro rodiny a skupiny, s větším prostorem a více ložnicemi.</p>
+          </div>
+
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px">
+            <a class="btn btn-primary" href="https://book.trevlix.com/book/app/?cid=8100968&currency=CZK&hex=5A8D2C&hide_tabs=map&lang=cs&mode=window&theme_color=hex" target="_blank">Otevřít Trevlix</a>
+            <a class="btn btn-ghost" href="https://vilasebest.cz/cenik/" target="_blank">Současný ceník</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="kontakt" class="footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="label">Kontakt</p>
+          <h2>Vila Šebest, Volary, Šumava.</h2>
+          <p class="footer-note">
+            Rezervace apartmánů probíhá přes Trevlix. Web slouží hlavně k přehlednému představení ubytování.
+          </p>
+        </div>
+
+        <div class="soft-box">
+          <h3 style="margin-top:0">Další krok</h3>
+          <p class="text">
+            Až bude sedět homepage, naváže detail apartmánů a potom samostatná stránka Masáže.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    menuToggle.addEventListener('click', () => {
+      mobilePanel.classList.toggle('open');
+      const expanded = mobilePanel.classList.contains('open');
+      menuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobilePanel.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
 </html>
