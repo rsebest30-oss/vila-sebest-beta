@@ -7,18 +7,19 @@
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root{
-      --bg:#f7f2ea;
-      --paper:#fffaf4;
-      --sand:#f0e3d2;
-      --line:#e2d4c1;
-      --text:#312820;
-      --muted:#756250;
-      --brown:#8a6847;
-      --brown-dark:#6f5136;
-      --accent:#dcc1a1;
+      --bg:#f4f1ea;
+      --paper:#fcfaf6;
+      --sand:#ebe5d8;
+      --line:#d9d7cc;
+      --text:#2f2f28;
+      --muted:#66695d;
+      --green:#74806a;
+      --green-dark:#5f6b56;
+      --green-soft:#dfe7d8;
+      --accent:#c7b89a;
       --max:1120px;
-      --radius:26px;
-      --shadow:0 12px 32px rgba(49,40,32,.08);
+      --radius:24px;
+      --shadow:0 10px 28px rgba(47,47,40,.08);
     }
 
     *{box-sizing:border-box}
@@ -26,7 +27,7 @@
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:linear-gradient(180deg,#f7f2ea 0%, #f4ede4 100%);
+      background:linear-gradient(180deg,#f4f1ea 0%, #efede6 100%);
       color:var(--text);
       line-height:1.6;
     }
@@ -44,7 +45,7 @@
       position:sticky;
       top:0;
       z-index:1000;
-      background:rgba(247,242,234,.94);
+      background:rgba(244,241,234,.95);
       border-bottom:1px solid var(--line);
       backdrop-filter:blur(10px);
     }
@@ -59,7 +60,7 @@
     }
 
     .logo-wrap img{
-      height:68px;
+      height:66px;
       width:auto;
     }
 
@@ -71,34 +72,46 @@
       align-items:center;
     }
 
-    .nav a:hover{color:var(--brown)}
+    .nav a:hover{color:var(--green)}
 
-    section{padding:52px 0}
-
-    .intro{
-      padding-top:34px;
+    .hero{
+      position:relative;
+      min-height:340px;
+      overflow:hidden;
+      background:#b6b8ae;
     }
 
-    .intro-grid,
-    .services,
-    .terms-grid{
-      display:grid;
-      gap:24px;
+    .hero-image{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .intro-card,
-    .card,
-    .terms-box,
-    .form-box{
-      background:var(--paper);
-      border-radius:var(--radius);
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(rgba(35,40,32,.22), rgba(35,40,32,.38));
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:flex-end;
+      min-height:340px;
+      padding:32px 0 28px;
+    }
+
+    .hero-box{
+      max-width:700px;
+      background:rgba(252,250,246,.88);
+      color:var(--text);
+      padding:22px;
+      border-radius:24px;
       box-shadow:var(--shadow);
-    }
-
-    .intro-card,
-    .terms-box,
-    .form-box{
-      padding:24px;
+      backdrop-filter:blur(6px);
     }
 
     .label{
@@ -107,18 +120,27 @@
       font-weight:700;
       letter-spacing:.24em;
       text-transform:uppercase;
-      color:#9a7c5d;
+      color:#7b7d70;
     }
 
     h1{
       margin:0;
-      font-size:clamp(34px,5vw,56px);
-      line-height:1.05;
+      font-size:clamp(30px,5vw,50px);
+      line-height:1.06;
     }
+
+    .hero-text{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:17px;
+      max-width:560px;
+    }
+
+    section{padding:54px 0}
 
     h2{
       margin:0;
-      font-size:clamp(28px,4vw,42px);
+      font-size:clamp(27px,4vw,40px);
       line-height:1.12;
     }
 
@@ -128,27 +150,17 @@
       font-size:17px;
     }
 
-    .intro-badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
+    .services,
+    .terms-grid{
+      display:grid;
+      gap:22px;
     }
 
-    .badge{
-      padding:9px 13px;
-      border-radius:999px;
-      background:var(--sand);
-      color:#684f39;
-      font-size:14px;
-      font-weight:700;
-    }
-
-    .intro-photo{
-      width:100%;
-      height:100%;
-      min-height:320px;
-      object-fit:cover;
+    .card,
+    .terms-box,
+    .form-box,
+    .note-box{
+      background:var(--paper);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
@@ -158,11 +170,14 @@
     }
 
     .card-top{
-      height:10px;
-      background:linear-gradient(90deg,#d8b895 0%, #f0ddc7 100%);
+      height:8px;
+      background:linear-gradient(90deg,var(--green-soft) 0%, var(--accent) 100%);
     }
 
-    .card-body{
+    .card-body,
+    .terms-box,
+    .form-box,
+    .note-box{
       padding:22px;
     }
 
@@ -176,7 +191,7 @@
 
     .service-head h3{
       margin:0;
-      font-size:24px;
+      font-size:23px;
       line-height:1.15;
     }
 
@@ -184,8 +199,8 @@
       white-space:nowrap;
       padding:7px 11px;
       border-radius:999px;
-      background:var(--sand);
-      color:#674f3a;
+      background:var(--green-soft);
+      color:#54614c;
       font-size:13px;
       font-weight:700;
     }
@@ -200,8 +215,8 @@
     .time-pill{
       padding:8px 12px;
       border-radius:999px;
-      background:#f3e8dc;
-      color:#5e4937;
+      background:#eef2ea;
+      color:#55614d;
       font-size:14px;
       font-weight:700;
     }
@@ -218,20 +233,20 @@
       border:1px solid var(--line);
       background:#fff;
       color:var(--text);
-      border-radius:18px;
+      border-radius:16px;
       padding:14px 16px;
       cursor:pointer;
       transition:.2s ease;
     }
 
     .term-btn:hover{
-      border-color:var(--brown);
+      border-color:var(--green);
       transform:translateY(-1px);
     }
 
     .term-btn.selected{
-      background:#f3e7da;
-      border-color:var(--brown);
+      background:#edf2e9;
+      border-color:var(--green);
     }
 
     .term-day{
@@ -250,9 +265,9 @@
     .selected-term{
       margin-top:12px;
       padding:12px 14px;
-      border-radius:18px;
-      background:#f2e6d8;
-      color:#5d4937;
+      border-radius:16px;
+      background:#edf2e9;
+      color:#54614c;
       font-weight:700;
     }
 
@@ -278,7 +293,7 @@
     input,select,textarea{
       width:100%;
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:14px;
       padding:12px 14px;
       background:#fff;
       color:var(--text);
@@ -302,16 +317,16 @@
     }
 
     .btn-primary{
-      background:var(--brown);
+      background:var(--green);
       color:#fff;
     }
 
     .btn-primary:hover{
-      background:var(--brown-dark);
+      background:var(--green-dark);
     }
 
     .footer{
-      padding:40px 0 50px;
+      padding:36px 0 46px;
       color:var(--muted);
       font-size:14px;
     }
@@ -328,11 +343,6 @@
 
     @media (min-width:980px){
       .nav{display:flex}
-
-      .intro-grid{
-        grid-template-columns:1.02fr .98fr;
-        align-items:center;
-      }
     }
   </style>
 </head>
@@ -353,24 +363,18 @@
     </div>
   </header>
 
-  <section class="intro">
-    <div class="container intro-grid">
-      <div class="intro-card">
-        <p class="label">Masáže</p>
-        <h1>Jednoduché objednání masáže v klidném a příjemném stylu.</h1>
-        <p class="text">
-          Vybereš si typ masáže, klikneš na volný termín a odešleš rezervaci.
-          Bez zbytečné složitosti a bez těžkého systému.
-        </p>
+  <section class="hero">
+    <img class="hero-image" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1800&auto=format&fit=crop" alt="Relaxační prostředí pro masáž">
+    <div class="hero-overlay"></div>
 
-        <div class="intro-badges">
-          <span class="badge">ručně vypisované termíny</span>
-          <span class="badge">rezervace přes formulář</span>
-          <span class="badge">notifikace na e-mail</span>
+    <div class="container hero-inner">
+      <div class="hero-box">
+        <p class="label">Masáže</p>
+        <h1>Masáže v klidném prostředí</h1>
+        <div class="hero-text">
+          Vyber si typ masáže, klikni na volný termín a jednoduše odešli rezervaci.
         </div>
       </div>
-
-      <img class="intro-photo" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1400&auto=format&fit=crop" alt="Relaxační lehátko a teplá atmosféra">
     </div>
   </section>
 
@@ -378,7 +382,7 @@
     <div class="container">
       <p class="label">Nabídka masáží</p>
       <h2>Přehled služeb</h2>
-      <p class="text">Pracovní návrh nabídky. Ceny a délky půjdou později doladit.</p>
+      <p class="text">Jednoduchý přehled masáží, délek a cen.</p>
 
       <div class="services" style="margin-top:28px">
         <article class="card">
@@ -388,7 +392,7 @@
               <h3>Masáž šíje a zad</h3>
               <span class="service-tag">oblíbená</span>
             </div>
-            <p class="text">Zaměřená na ztuhlou šíji, horní část zad a běžné každodenní přetížení.</p>
+            <p class="text">Zaměřená na ztuhlou šíji, horní část zad a běžné přetížení.</p>
             <div class="service-times">
               <span class="time-pill">30 min / 500 Kč</span>
               <span class="time-pill">60 min / 800 Kč</span>
@@ -403,7 +407,7 @@
               <h3>Relaxační masáž</h3>
               <span class="service-tag">klidná</span>
             </div>
-            <p class="text">Jemnější tempo a příjemné uvolnění pro celkový odpočinek a zklidnění.</p>
+            <p class="text">Jemnější tempo a příjemné uvolnění pro celkový odpočinek.</p>
             <div class="service-times">
               <span class="time-pill">60 min / 900 Kč</span>
               <span class="time-pill">90 min / 1 200 Kč</span>
@@ -418,7 +422,7 @@
               <h3>Sportovní masáž</h3>
               <span class="service-tag">intenzivnější</span>
             </div>
-            <p class="text">Vhodná po výkonu nebo při větším svalovém napětí, s důrazem na hlubší práci.</p>
+            <p class="text">Vhodná po výkonu nebo při větším svalovém napětí.</p>
             <div class="service-times">
               <span class="time-pill">60 min / 900 Kč</span>
               <span class="time-pill">90 min / 1 300 Kč</span>
@@ -433,7 +437,7 @@
               <h3>Uvolňující masáž zad</h3>
               <span class="service-tag">záda</span>
             </div>
-            <p class="text">Cílená práce hlavně na oblast zad pro uvolnění běžného napětí a ztuhlosti.</p>
+            <p class="text">Cílená práce hlavně na oblast zad pro uvolnění napětí.</p>
             <div class="service-times">
               <span class="time-pill">30 min / 500 Kč</span>
               <span class="time-pill">60 min / 800 Kč</span>
@@ -448,7 +452,7 @@
               <h3>Regenerační masáž</h3>
               <span class="service-tag">obnova</span>
             </div>
-            <p class="text">Příjemná kombinace technik pro uvolnění a regeneraci po náročnějším období.</p>
+            <p class="text">Příjemná kombinace technik pro uvolnění a regeneraci.</p>
             <div class="service-times">
               <span class="time-pill">60 min / 900 Kč</span>
             </div>
