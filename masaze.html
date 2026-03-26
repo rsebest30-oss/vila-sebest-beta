@@ -1,1 +1,555 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masáže – Vila Šebest</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg:#f6f1e8;
+      --paper:#fbf7f1;
+      --sand:#ede2d1;
+      --line:#ddcfbb;
+      --text:#2c241d;
+      --muted:#6d5a48;
+      --brown:#7b5f3b;
+      --brown-dark:#5f472d;
+      --dark:#231c16;
+      --white:#ffffff;
+      --max:1120px;
+      --shadow:0 10px 30px rgba(44,36,29,.08);
+      --radius:24px;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(246,241,232,.96);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(10px);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      min-height:86px;
+      padding:8px 0;
+    }
+
+    .logo-wrap img{
+      height:70px;
+      width:auto;
+    }
+
+    .nav{
+      display:none;
+      gap:22px;
+      font-size:15px;
+      font-weight:700;
+      align-items:center;
+    }
+
+    .nav a:hover{color:var(--brown)}
+
+    .hero{
+      background:
+        linear-gradient(rgba(28,22,18,.38), rgba(28,22,18,.52)),
+        url('hero-sumava.jpg') center center/cover no-repeat;
+      color:#fff;
+      padding:78px 0 64px;
+    }
+
+    .hero h1{
+      margin:0;
+      max-width:760px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.04;
+    }
+
+    .hero p{
+      margin:16px 0 0;
+      max-width:720px;
+      font-size:18px;
+      color:rgba(255,255,255,.92);
+    }
+
+    .hero-note{
+      margin-top:18px;
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.16);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    section{padding:60px 0}
+
+    .label{
+      margin:0 0 10px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:#8b7354;
+    }
+
+    h2{
+      margin:0;
+      font-size:clamp(28px, 4vw, 44px);
+      line-height:1.12;
+    }
+
+    .text{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .grid-2,
+    .services,
+    .terms-grid{
+      display:grid;
+      gap:24px;
+    }
+
+    .card{
+      background:var(--paper);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .card-body{
+      padding:22px;
+    }
+
+    .service-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:10px;
+    }
+
+    .service-head h3{
+      margin:0;
+      font-size:24px;
+      line-height:1.15;
+    }
+
+    .service-tag{
+      white-space:nowrap;
+      padding:7px 11px;
+      border-radius:999px;
+      background:var(--sand);
+      color:#5a4737;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .service-times{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .time-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f1e7d8;
+      color:#5b4838;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .terms-box,
+    .form-box{
+      background:var(--paper);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .terms-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .term-btn{
+      width:100%;
+      text-align:left;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 16px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .term-btn:hover{
+      border-color:var(--brown);
+      transform:translateY(-1px);
+    }
+
+    .term-btn.selected{
+      background:#efe5d7;
+      border-color:var(--brown);
+    }
+
+    .term-day{
+      font-weight:700;
+      display:block;
+    }
+
+    .term-time{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:2px;
+      display:block;
+    }
+
+    .small-note{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    form{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    label{
+      display:grid;
+      gap:6px;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      background:#fff;
+      color:var(--text);
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:999px;
+      padding:14px 20px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:var(--brown);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--brown-dark);
+    }
+
+    .selected-term{
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#efe5d7;
+      color:#5b4838;
+      font-weight:700;
+    }
+
+    .footer{
+      background:var(--dark);
+      color:#f5ede2;
+      padding:46px 0;
+      margin-top:28px;
+    }
+
+    .footer p{
+      margin:0;
+      color:#d8cdbf;
+    }
+
+    @media (min-width:760px){
+      .services{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .terms-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (min-width:980px){
+      .nav{display:flex}
+      .grid-2{
+        grid-template-columns:1.05fr .95fr;
+        align-items:start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="logo-wrap" href="index.html" aria-label="Vila Šebest">
+        <img src="https://vilasebest.cz/wp-content/uploads/2025/07/sebest_lg.png" alt="Vila Šebest logo">
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Úvod</a>
+        <a href="#nabidka">Masáže</a>
+        <a href="#terminy">Volné termíny</a>
+        <a href="#rezervace">Rezervace</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="label" style="color:#efe3d0">Masáže ve Vila Šebest</p>
+      <h1>Jednoduchá rezervace masáže ve Volarech.</h1>
+      <p>
+        Přehled služeb, ručně vypisované volné termíny a snadné objednání.
+        Po odeslání rezervace přijde notifikace na e-mail.
+      </p>
+      <div class="hero-note">Trevlix je jen pro apartmány. Masáže mají vlastní rezervaci.</div>
+    </div>
+  </section>
+
+  <section id="nabidka">
+    <div class="container">
+      <p class="label">Nabídka masáží</p>
+      <h2>Přehled služeb</h2>
+      <p class="text">
+        Zatím pracovní návrh nabídky. Služby i ceny se dají později upravit.
+      </p>
+
+      <div class="services" style="margin-top:28px">
+        <article class="card">
+          <div class="card-body">
+            <div class="service-head">
+              <h3>Masáž šíje a zad</h3>
+              <span class="service-tag">oblíbená</span>
+            </div>
+            <p class="text">Zaměřená na ztuhlou šíji, horní část zad a běžné každodenní přetížení.</p>
+            <div class="service-times">
+              <span class="time-pill">30 min / 500 Kč</span>
+              <span class="time-pill">60 min / 800 Kč</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="service-head">
+              <h3>Relaxační masáž</h3>
+              <span class="service-tag">klidná</span>
+            </div>
+            <p class="text">Jemnější tempo a příjemné uvolnění pro celkový odpočinek a zklidnění.</p>
+            <div class="service-times">
+              <span class="time-pill">60 min / 900 Kč</span>
+              <span class="time-pill">90 min / 1 200 Kč</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="service-head">
+              <h3>Sportovní masáž</h3>
+              <span class="service-tag">intenzivnější</span>
+            </div>
+            <p class="text">Vhodná po výkonu nebo při větším svalovém napětí, s důrazem na hlubší práci.</p>
+            <div class="service-times">
+              <span class="time-pill">60 min / 900 Kč</span>
+              <span class="time-pill">90 min / 1 300 Kč</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="service-head">
+              <h3>Uvolňující masáž zad</h3>
+              <span class="service-tag">záda</span>
+            </div>
+            <p class="text">Cílená práce hlavně na oblast zad pro uvolnění běžného napětí a ztuhlosti.</p>
+            <div class="service-times">
+              <span class="time-pill">30 min / 500 Kč</span>
+              <span class="time-pill">60 min / 800 Kč</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="service-head">
+              <h3>Regenerační masáž</h3>
+              <span class="service-tag">obnova</span>
+            </div>
+            <p class="text">Příjemná kombinace technik pro uvolnění a regeneraci po náročnějším období.</p>
+            <div class="service-times">
+              <span class="time-pill">60 min / 900 Kč</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="terminy">
+    <div class="container">
+      <p class="label">Volné termíny</p>
+      <h2>Vyber si termín</h2>
+      <p class="text">
+        Termíny jsou jen pracovní ukázka. Později si je bude dcera doplňovat sama z telefonu.
+      </p>
+
+      <div class="terms-grid" style="margin-top:28px">
+        <div class="terms-box">
+          <h3 style="margin:0">Aktuální volné termíny</h3>
+          <div class="terms-list" id="termsList">
+            <button class="term-btn" type="button" data-term="Pátek 17:00">
+              <span class="term-day">Pátek</span>
+              <span class="term-time">17:00</span>
+            </button>
+            <button class="term-btn" type="button" data-term="Pátek 18:15">
+              <span class="term-day">Pátek</span>
+              <span class="term-time">18:15</span>
+            </button>
+            <button class="term-btn" type="button" data-term="Sobota 9:00">
+              <span class="term-day">Sobota</span>
+              <span class="term-time">9:00</span>
+            </button>
+            <button class="term-btn" type="button" data-term="Sobota 10:15">
+              <span class="term-day">Sobota</span>
+              <span class="term-time">10:15</span>
+            </button>
+            <button class="term-btn" type="button" data-term="Sobota 13:00">
+              <span class="term-day">Sobota</span>
+              <span class="term-time">13:00</span>
+            </button>
+            <button class="term-btn" type="button" data-term="Neděle 15:30">
+              <span class="term-day">Neděle</span>
+              <span class="term-time">15:30</span>
+            </button>
+          </div>
+          <p class="small-note">
+            Počítá se s pauzou mezi masážemi. Později se termín po rezervaci automaticky schová.
+          </p>
+        </div>
+
+        <div class="form-box" id="rezervace">
+          <h3 style="margin:0">Nezávazná rezervace</h3>
+          <p class="text" style="margin-top:10px">
+            Vyber termín, typ masáže a vyplň kontakt. Po odeslání má přijít notifikace na e-mail:
+            <strong>rsebest31@gmail.com</strong>
+          </p>
+
+          <div class="selected-term" id="selectedTermBox">Vybraný termín: zatím žádný</div>
+
+          <form>
+            <label>
+              Jméno a příjmení
+              <input type="text" placeholder="Např. Jana Nováková">
+            </label>
+
+            <label>
+              Telefon
+              <input type="tel" placeholder="Např. 777 123 456">
+            </label>
+
+            <label>
+              E-mail
+              <input type="email" placeholder="Např. jana@email.cz">
+            </label>
+
+            <label>
+              Druh masáže
+              <select>
+                <option>Masáž šíje a zad</option>
+                <option>Relaxační masáž</option>
+                <option>Sportovní masáž</option>
+                <option>Uvolňující masáž zad</option>
+                <option>Regenerační masáž</option>
+              </select>
+            </label>
+
+            <label>
+              Poznámka
+              <textarea placeholder="Např. preferovaný čas, zdravotní omezení, doplnění..."></textarea>
+            </label>
+
+            <button class="btn btn-primary" type="button">Odeslat rezervaci</button>
+          </form>
+
+          <p class="small-note">
+            Tahle verze je zatím ukázka vzhledu. Další krok bude správa termínů z telefonu + skutečné odesílání e-mailu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Testovací verze stránky Masáže. Zatím jen návrh vzhledu a logiky rezervace.</p>
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.term-btn');
+    const selectedTermBox = document.getElementById('selectedTermBox');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedTermBox.textContent = 'Vybraný termín: ' + btn.dataset.term;
+      });
+    });
+  </script>
+</body>
+</html>
